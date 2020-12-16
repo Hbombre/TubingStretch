@@ -57,7 +57,7 @@ float tubingCoefficient=.30675;
     [self load];
     timesOpened++;
     [self save];
-    [self rateThisAppInterval];
+    //[self rateThisAppInterval];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
@@ -70,7 +70,7 @@ float tubingCoefficient=.30675;
     [self resetStuff];
     timer = [NSTimer scheduledTimerWithTimeInterval:.1 target:self selector:@selector(calculateAll) userInfo:nil repeats:YES];
     
-    buttonAdTimer = [NSTimer scheduledTimerWithTimeInterval:4 target:self selector:@selector(changeButtonAdImage) userInfo:nil repeats:YES];
+    //buttonAdTimer = [NSTimer scheduledTimerWithTimeInterval:4 target:self selector:@selector(changeButtonAdImage) userInfo:nil repeats:YES];
     
     //units.tintColor = [UIColor blackColor];
     //tbgSize.tintColor = [UIColor blackColor];
@@ -108,7 +108,7 @@ float tubingCoefficient=.30675;
             answer2.text = [NSString stringWithFormat:@"%.1f inches stretch", fAnswer];
 
         } else {
-            float fAnswer = (([tensionRequired.text floatValue]*2.2046*.001)*([depth.text floatValue]*3.281*.001)*tubingCoefficient);
+            float fAnswer = (([tensionRequired.text floatValue]*2.2046)*([depth.text floatValue]*3.281*.001)*tubingCoefficient);
             answer.text = [NSString stringWithFormat:@"%.1f centimeters stretch", (fAnswer*2.54)];
             answer2.text = [NSString stringWithFormat:@"%.1f inches stretch", fAnswer];
 
@@ -147,7 +147,7 @@ float tubingCoefficient=.30675;
 }
 -(void) rateThisAppInterval{
     if (!seenNewApp && timesOpened >1) {
-        [self CheckOutNewApp];
+       // [self CheckOutNewApp];
     }
 }
 
@@ -199,7 +199,7 @@ float tubingCoefficient=.30675;
 - (IBAction)toggleControlsUnit:(id)sender{
     if ([sender selectedSegmentIndex]==kMetricSwitchIndex) {
         METRIC=YES;
-        tensionRequiredUnit.text = [NSString stringWithFormat:@"daN"];
+        tensionRequiredUnit.text = [NSString stringWithFormat:@"daN x 1000"];
         depthUnit.text = [NSString stringWithFormat:@"m"];
     }
     else {
@@ -221,7 +221,7 @@ float tubingCoefficient=.30675;
 }
 
 -(IBAction)CheckOutNewApps:(id)sender{
-    NSURL *url = [NSURL URLWithString:@"https://itunes.apple.com/us/app/lease-locator-well-info-and-weather-for-canada/id1140689878?ls=1&mt=8"];
-    [[UIApplication sharedApplication] openURL:url];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://apps.apple.com/app/id1140689878"] options:@{} completionHandler:nil];
+
 }
 @end
